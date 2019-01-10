@@ -19,7 +19,7 @@ def make_level():
         while True:
             x = random.randint(0, 14)
             y = random.randint(0, 14)
-            if not build_level[x][y] in ("1", "2", "3", "4", "5", "6"):
+            if not build_level[x][y] in ("1", "2", "3", 4, 5, 6):
                 build_level[x][y] = i + 4
                 break
     return build_level
