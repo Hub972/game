@@ -8,8 +8,8 @@ import sys
 import time
 import os
 
-
 pygame.init()
+
 
 # Load the level and add 3 objects under random position
 def make_level():
@@ -25,7 +25,7 @@ def make_level():
     return build_level
 
 
-#Check the position of mac
+# Check the position of mac
 def find_player(maze):
     for i in range(len(maze)):
         for j in range(len(maze[i])):
@@ -38,8 +38,8 @@ def right(build_level):
     maze = build_level[:]
     x, y = find_player(maze)
     if y < 14:
-        if maze[x][y+1] != "1":
-            maze[x][y+1] = "3"
+        if maze[x][y + 1] != "1":
+            maze[x][y + 1] = "3"
             maze[x][y] = "0"
     return maze
 
@@ -48,8 +48,8 @@ def left(build_level):
     maze = build_level[:]
     x, y = find_player(maze)
     if y > 0:
-        if maze[x][y-1] != "1":
-            maze[x][y-1] = "3"
+        if maze[x][y - 1] != "1":
+            maze[x][y - 1] = "3"
             maze[x][y] = "0"
     return maze
 
@@ -58,8 +58,8 @@ def up(build_level):
     maze = build_level[:]
     x, y = find_player(maze)
     if x > 0:
-        if maze[x-1][y] != "1":
-            maze[x-1][y] = "3"
+        if maze[x - 1][y] != "1":
+            maze[x - 1][y] = "3"
             maze[x][y] = "0"
     return maze
 
@@ -68,8 +68,8 @@ def down(build_level):
     maze = build_level[:]
     x, y = find_player(maze)
     if x < 14:
-        if maze[x+1][y] != "1":
-            maze[x+1][y] = "3"
+        if maze[x + 1][y] != "1":
+            maze[x + 1][y] = "3"
             maze[x][y] = "0"
     return maze
 
