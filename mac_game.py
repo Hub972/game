@@ -8,10 +8,10 @@ import sys
 import time
 import os
 
-# Load the level and add 3 objects under random position
+
 pygame.init()
 
-
+# Load the level and add 3 objects under random position
 def make_level():
     with open("level.txt", "r") as file:
         build_level = [list(line) for line in file.read().split("\n")]
@@ -25,6 +25,7 @@ def make_level():
     return build_level
 
 
+#Check the position of mac
 def find_player(maze):
     for i in range(len(maze)):
         for j in range(len(maze[i])):
@@ -76,15 +77,14 @@ def down(build_level):
 # Take the platform and blit each picture for each condition
 def make_graph(maze):
     screen = pygame.display.set_mode((450, 450))
-    frame = pygame.image.load("media/oc.png")
-    frame = pygame.transform.scale(frame, (450, 450))
     media = os.listdir("media")
-    name = ["guard", "lframe", "mac", "ether", "wall", "pipe", "syring"]
+    name = ["guard", "frame", "mac", "ether", "wall", "pipe", "syring"]
     a = 0
     for i in media:
         name[a] = pygame.image.load("media/" + i)
         a += 1
-    screen.blit(frame, (0, 0))
+    name[1] = pygame.transform.scale(name[1], (450, 450))
+    screen.blit(name[1], (0, 0))
     num_line = 0
     for line in maze:
         num_case = 0
