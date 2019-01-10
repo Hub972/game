@@ -110,7 +110,7 @@ def make_graph(maze):
     return
 
 
-# For each position of '3' check if the condition is done or wrong
+# For each position of '3' check if the condition is done or wrong.
 def result_game(maze):
     count_ob = 0
     for i in range(len(maze)):
