@@ -113,14 +113,12 @@ def make_graph(maze):
 # For each position of '3' check if the condition is done or wrong.
 def result_game(maze):
     count_ob = 0
+    x, y = find_player(maze)
     for i in range(len(maze)):
         for j in range(len(maze[i])):
-            if maze[i][j] == "3":
-                x_ply = i
-                y_ply = j
-            elif maze[i][j] == 4 or maze[i][j] == 5 or maze[i][j] == 6:
+            if maze[i][j] == 4 or maze[i][j] == 5 or maze[i][j] == 6:
                 count_ob += 1
-    if maze[x_ply][y_ply] == maze[14][14]:
+    if maze[x][y] == maze[14][14]:
         if count_ob == 0:
             pygame.display.set_caption("You win")
             time.sleep(5)
