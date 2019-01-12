@@ -29,10 +29,8 @@ def make_level():
 def load_media():
     media = os.listdir("media")
     name = ["guard", "frame", "mac", "ether", "wall", "pipe", "syring"]
-    a = 0
     for i in enumerate(media):
-        name[a] = pygame.image.load("media/{}".format(str(i[1])))
-        a += 1
+        name[i[0]] = pygame.image.load("media/{}".format(i[1]))
     return name
 
 
