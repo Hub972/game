@@ -30,8 +30,8 @@ def load_media():
     media = os.listdir("media")
     name = ["guard", "frame", "mac", "ether", "wall", "pipe", "syring"]
     a = 0
-    for i in media:
-        name[a] = pygame.image.load("media/" + i)
+    for i in enumerate(media):
+        name[a] = pygame.image.load("media/{}".format(str(i[1])))
         a += 1
     return name
 
