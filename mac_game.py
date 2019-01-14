@@ -29,8 +29,8 @@ def make_level():
 def load_media():
     media = os.listdir("media")
     name = ["guard", "frame", "mac", "ether", "wall", "pipe", "syring"]
-    for i in enumerate(media):
-        name[i[0]] = pygame.image.load("media/{}".format(i[1]))
+    for i, name_m in enumerate(media):
+        name[i] = pygame.image.load("media/"+str(name_m))
     return name
 
 
@@ -82,33 +82,38 @@ def result_game(maze):
             sys.exit(0)
 
 
-# Set the game
-d = ""
-build = make_level()
-direc = direction.Mac(build)
-name = load_media()
-draw(build, name)
+def main():
+    # Set the game
+    d = ""
+    build = make_level()
+    direc = direction.Mac(build)
+    name = load_media()
+    draw(build, name)
 
-# Launch the game
-while d != "q":
-    # Check the events with pygame
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            d = "q"
-        if event.type == KEYDOWN:
-            if event.key == K_RIGHT:
-                maze = direc.right(build)
-                draw(maze, name)
-                result_game(maze)
-            elif event.key == K_LEFT:
-                maze = direc.left(build)
-                draw(maze, name)
-                result_game(maze)
-            elif event.key == K_DOWN:
-                maze = direc.down(build)
-                draw(maze, name)
-                result_game(maze)
-            elif event.key == K_UP:
-                maze = direc.up(build)
-                draw(maze, name)
-                result_game(maze)
+    # Launch the game
+    while d != "q":
+        # Check the events with pygame
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                d = "q"
+            if event.type == KEYDOWN:
+                if event.key == K_RIGHT:
+                    maze = direc.right(build)
+                    draw(maze, name)
+                    result_game(maze)
+                elif event.key == K_LEFT:
+                    maze = direc.left(build)
+                    draw(maze, name)
+                    result_game(maze)
+                elif event.key == K_DOWN:
+                    maze = direc.down(build)
+                    draw(maze, name)
+                    result_game(maze)
+                elif event.key == K_UP:
+                    maze = direc.up(build)
+                    draw(maze, name)
+                    result_game(maze)
+
+
+if __name__ == '__main__':
+    main()

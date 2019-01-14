@@ -19,7 +19,8 @@ class Mac:
     # Make a new position for '3' if it don't '1' and return a new platform
     @classmethod
     def right(cls, build_level):
-        maze = build_level[:]
+        cls.build_level = build_level
+        maze = cls.build_level[:]
         x, y = find_player(maze)
         if y < 14:
             if maze[x][y + 1] != "1":
@@ -29,7 +30,8 @@ class Mac:
 
     @classmethod
     def left(cls, build_level):
-        maze = build_level[:]
+        cls.build_level = build_level
+        maze = cls.build_level[:]
         x, y = find_player(maze)
         if y > 0:
             if maze[x][y - 1] != "1":
@@ -39,7 +41,8 @@ class Mac:
 
     @classmethod
     def up(cls, build_level):
-        maze = build_level[:]
+        cls.build_level = build_level
+        maze = cls.build_level[:]
         x, y = find_player(maze)
         if x > 0:
             if maze[x - 1][y] != "1":
@@ -49,7 +52,8 @@ class Mac:
 
     @classmethod
     def down(cls, build_level):
-        maze = build_level[:]
+        cls.build_level = build_level
+        maze = cls.build_level[:]
         x, y = find_player(maze)
         if x < 14:
             if maze[x + 1][y] != "1":
