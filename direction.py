@@ -14,6 +14,7 @@ def find_tile(maze, tile):
 class Mac:
     def __init__(self, build_level):
         self.build_level = build_level
+        self.maze = []
 
     # Make a new position for '3' if it don't '1' and return a new platform
     @classmethod
@@ -25,7 +26,7 @@ class Mac:
             if cls.maze[x][y + 1] != "1":
                 cls.maze[x][y + 1] = "3"
                 cls.maze[x][y] = "0"
-        return list(cls.maze)
+        return cls.maze
 
     @classmethod
     def left(cls, build_level):
@@ -36,7 +37,7 @@ class Mac:
             if cls.maze[x][y - 1] != "1":
                 cls.maze[x][y - 1] = "3"
                 cls.maze[x][y] = "0"
-        return list(cls.maze)
+        return cls.maze
 
     @classmethod
     def up(cls, build_level):
@@ -47,7 +48,7 @@ class Mac:
             if cls.maze[x - 1][y] != "1":
                 cls.maze[x - 1][y] = "3"
                 cls.maze[x][y] = "0"
-        return list(cls.maze)
+        return cls.maze
 
     @classmethod
     def down(cls, build_level):
@@ -58,4 +59,4 @@ class Mac:
             if cls.maze[x + 1][y] != "1":
                 cls.maze[x + 1][y] = "3"
                 cls.maze[x][y] = "0"
-        return list(cls.maze)
+        return cls.maze
