@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import Dict, Any
 
 import pygame
 from pygame.locals import *
@@ -27,38 +28,23 @@ def make_level():
 
 
 def load_media():
-    media = os.listdir("media")
-    name = ["guard", "frame", "mac", "ether", "wall", "pipe", "syring"]
-    for i, name_m in enumerate(media):
-        name[i] = pygame.image.load("media/"+str(name_m))
-    return name
+    pictures = {}
+    for tile, name in (("2", "Guardien"), ("00", "oc"), ("3", "MacGyver"), ("6", "ether"), ("1", "wall"),("4", "pipe"),\
+                       ("5", "syring")):
+        pictures[tile] = pygame.image.load("media/"+name+".png")
+    pictures["00"] = pygame.transform.scale(pictures["00"], (450, 450))
+    return pictures
 
 
 # Take the platform and blit each picture for each condition
-def draw(maze, name):
+def draw(maze, pictures):
     screen = pygame.display.set_mode((450, 450))
-    name[1] = pygame.transform.scale(name[1], (450, 450))
-    screen.blit(name[1], (0, 0))
-    num_line = 0
-    for line in maze:
-        num_case = 0
-        for sprite in line:
-            x = num_case * 30
-            y = num_line * 30
-            if sprite == "1":
-                screen.blit(name[4], (x, y))
-            elif sprite == "3":
-                screen.blit(name[2], (x, y))
-            elif sprite == "2":
-                screen.blit(name[0], (x, y))
-            elif sprite == "4":
-                screen.blit(name[5], (x, y))
-            elif sprite == "5":
-                screen.blit(name[6], (x, y))
-            elif sprite == "6":
-                screen.blit(name[3], (x, y))
-            num_case += 1
-        num_line += 1
+    screen.blit(pictures["00"], (0, 0))
+    for n_line, line in enumerate(maze):
+        for n_tile, tile in enumerate(line):
+            x = n_tile * 30
+            y = n_line * 30
+            if tile != "0": screen.blit(pictures[tile], (x, y))
     pygame.display.set_caption('MacGame')
     pygame.display.flip()
 

@@ -20,43 +20,43 @@ class Mac:
     @classmethod
     def right(cls, build_level):
         cls.build_level = build_level
-        maze = cls.build_level[:]
-        x, y = find_player(maze)
+        cls.maze = cls.build_level[:]
+        x, y = find_player(cls.maze)
         if y < 14:
-            if maze[x][y + 1] != "1":
-                maze[x][y + 1] = "3"
-                maze[x][y] = "0"
-        return list(maze)
+            if cls.maze[x][y + 1] != "1":
+                cls.maze[x][y + 1] = "3"
+                cls.maze[x][y] = "0"
+        return list(cls.maze)
 
     @classmethod
     def left(cls, build_level):
         cls.build_level = build_level
-        maze = cls.build_level[:]
-        x, y = find_player(maze)
+        cls.maze = cls.build_level[:]
+        x, y = find_player(cls.maze)
         if y > 0:
-            if maze[x][y - 1] != "1":
-                maze[x][y - 1] = "3"
-                maze[x][y] = "0"
-        return list(maze)
+            if cls.maze[x][y - 1] != "1":
+                cls.maze[x][y - 1] = "3"
+                cls.maze[x][y] = "0"
+        return list(cls.maze)
 
     @classmethod
     def up(cls, build_level):
         cls.build_level = build_level
-        maze = cls.build_level[:]
-        x, y = find_player(maze)
+        cls.maze = cls.build_level[:]
+        x, y = find_player(cls.maze)
         if x > 0:
-            if maze[x - 1][y] != "1":
-                maze[x - 1][y] = "3"
-                maze[x][y] = "0"
-        return list(maze)
+            if cls.maze[x - 1][y] != "1":
+                cls.maze[x - 1][y] = "3"
+                cls.maze[x][y] = "0"
+        return list(cls.maze)
 
     @classmethod
     def down(cls, build_level):
         cls.build_level = build_level
-        maze = cls.build_level[:]
-        x, y = find_player(maze)
+        cls.maze = cls.build_level[:]
+        x, y = find_player(cls.maze)
         if x < 14:
-            if maze[x + 1][y] != "1":
-                maze[x + 1][y] = "3"
-                maze[x][y] = "0"
-        return list(maze)
+            if cls.maze[x + 1][y] != "1":
+                cls.maze[x + 1][y] = "3"
+                cls.maze[x][y] = "0"
+        return list(cls.maze)
