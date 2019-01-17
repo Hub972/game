@@ -3,13 +3,12 @@
 
 
 # Check the position of mac
-def find_player(maze):
+def find_tile(maze, tile):
     for i in range(len(maze)):
         for j in range(len(maze[i])):
-            if maze[i][j] == "3":
+            if maze[i][j] == tile:
                 return i, j
-            else:
-                None
+    return None
 
 
 class Mac:
@@ -21,7 +20,7 @@ class Mac:
     def right(cls, build_level):
         cls.build_level = build_level
         cls.maze = cls.build_level[:]
-        x, y = find_player(cls.maze)
+        x, y = find_tile(cls.maze, "3")
         if y < 14:
             if cls.maze[x][y + 1] != "1":
                 cls.maze[x][y + 1] = "3"
@@ -32,7 +31,7 @@ class Mac:
     def left(cls, build_level):
         cls.build_level = build_level
         cls.maze = cls.build_level[:]
-        x, y = find_player(cls.maze)
+        x, y = find_tile(cls.maze, "3")
         if y > 0:
             if cls.maze[x][y - 1] != "1":
                 cls.maze[x][y - 1] = "3"
@@ -43,7 +42,7 @@ class Mac:
     def up(cls, build_level):
         cls.build_level = build_level
         cls.maze = cls.build_level[:]
-        x, y = find_player(cls.maze)
+        x, y = find_tile(cls.maze, "3")
         if x > 0:
             if cls.maze[x - 1][y] != "1":
                 cls.maze[x - 1][y] = "3"
@@ -54,7 +53,7 @@ class Mac:
     def down(cls, build_level):
         cls.build_level = build_level
         cls.maze = cls.build_level[:]
-        x, y = find_player(cls.maze)
+        x, y = find_tile(cls.maze, "3")
         if x < 14:
             if cls.maze[x + 1][y] != "1":
                 cls.maze[x + 1][y] = "3"

@@ -1,5 +1,4 @@
 pygame
-os
 sys
 time
 random
