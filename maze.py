@@ -93,6 +93,16 @@ class Maze:
                 cls.maze[x][y] = "0"
         return list(cls.maze)
 
+    def component_count(self, maze):
+        """Check the count of component"""
+        self.maze = maze
+        count = 0
+        for i in range(len(self.maze)):
+            for y in range(len(maze[i])):
+                if maze[i][y] == "4" or maze[i][y] == "5" or maze[i][y] == "6":
+                    count += 1
+        pygame.display.set_caption('MacGame, number of object(s) to found: {}'.format(count))
+
     def component_found(self, maze):
         """Check if the component is under the maze"""
         self.maze = maze

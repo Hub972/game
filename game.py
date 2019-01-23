@@ -29,7 +29,7 @@ class Game:
         self.pictures = pictures
         blit_pic = dr.Maze()
         blit_pic.blit_picture(self.pictures, self.maze)
-        pygame.display.set_caption('MacGame')
+        blit_pic.component_count(self.maze)
         pygame.display.flip()
 
     def check_victory(self, maze):
