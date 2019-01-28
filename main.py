@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
-import game
-import maze as dr
+import maze
+
 
 
 pygame.init()
@@ -10,11 +10,10 @@ pygame.init()
 def main():
     """Set the game"""
     d = ""
-    gam = game.Game()
-    direc = dr.Maze()
-    build = direc.make_level()
-    pic = gam.load_media()
-    gam.draw(pic, build)
+    maz = maze.Maze()
+    maz.make_level()
+    maz.load_media()
+    maz.blit_picture()
 
     """Launch the game"""
     while d != "q":
@@ -24,21 +23,21 @@ def main():
                 d = "q"
             if event.type == KEYDOWN:
                 if event.key == K_RIGHT:
-                    maze = direc.right(build)
-                    gam.draw(pic, maze)
-                    gam.check_victory(maze)
+                    maz.right()
+                    maz.blit_picture()
+                    maz.check_victory()
                 elif event.key == K_LEFT:
-                    maze = direc.left(build)
-                    gam.draw(pic, maze)
-                    gam.check_victory(maze)
+                    maz.left()
+                    maz.blit_picture()
+                    maz.check_victory()
                 elif event.key == K_DOWN:
-                    maze = direc.down(build)
-                    gam.draw(pic, maze)
-                    gam.check_victory(maze)
+                    maz.down()
+                    maz.blit_picture()
+                    maz.check_victory()
                 elif event.key == K_UP:
-                    maze = direc.up(build)
-                    gam.draw(pic, maze)
-                    gam.check_victory(maze)
+                    maz.up()
+                    maz.blit_picture()
+                    maz.check_victory()
 
 
 if __name__ == '__main__':
