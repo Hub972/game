@@ -106,7 +106,7 @@ class Maze:
         screen.blit(title_text, textpos)
         pygame.display.flip()
 
-    def check_pos(self):
+    def check_final_condition(self):
         """Check if mac is on the guard"""
         x_p, y_p = self.find_mac()
         if self.tile[x_p][y_p] == self.tile[14][14]:

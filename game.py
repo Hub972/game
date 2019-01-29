@@ -62,7 +62,7 @@ class Game:
 
     def check_victory(self):
         """For each position of mac check if the condition is done or wrong."""
-        if self.tile.check_pos():
+        if self.tile.check_final_condition():
             if self.tile.component_found():
                 pygame.display.set_caption('You lose')
                 time.sleep(3)
