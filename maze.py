@@ -39,7 +39,7 @@ class Maze:
                     return i, j
         return None
 
-    def right(self):
+    def move_right(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if y < 14:
@@ -47,7 +47,7 @@ class Maze:
                 self.tile[x][y + 1] = "3"
                 self.tile[x][y] = "0"
 
-    def left(self):
+    def move_left(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if y > 0:
@@ -55,7 +55,7 @@ class Maze:
                 self.tile[x][y - 1] = "3"
                 self.tile[x][y] = "0"
 
-    def up(self):
+    def move_up(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if x > 0:
@@ -63,7 +63,7 @@ class Maze:
                 self.tile[x - 1][y] = "3"
                 self.tile[x][y] = "0"
 
-    def down(self):
+    def move_down(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if x < 14:
@@ -71,7 +71,7 @@ class Maze:
                 self.tile[x + 1][y] = "3"
                 self.tile[x][y] = "0"
 
-    def component_count(self):
+    def component_counter(self):
         """Check the count of component"""
         cnt = 0
         for i in range(len(self.tile)):
@@ -97,7 +97,6 @@ class Maze:
                 y = n_line * 30
                 if tile != "0": screen.blit(pictures[tile], (x, y))
         """Set the rect for the counter in the screen"""
-        self.component_count()
         title_text = text.render("Number of object(s) to found: {}".format(self.count),
                                  True, ORANGE)
         textpos = title_text.get_rect()
@@ -116,4 +115,4 @@ class Maze:
     def draw(self, pictures):
         """All the methode for draw in 'game' """
         self.blit_picture(pictures)
-        self.component_count()
+        self.component_counter()
