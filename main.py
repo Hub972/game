@@ -12,9 +12,9 @@ def main():
     d = ""
     gam = game.Game()
     mz = maze.Maze()
-    mz.make_level()
+    t = mz.make_level()
     gam.load_media()
-    gam.draw()
+    gam.draw(t)
 
     """Launch the game"""
     while d != "q":
@@ -24,20 +24,20 @@ def main():
                 d = "q"
             if event.type == KEYDOWN:
                 if event.key == K_RIGHT:
-                    mz.right()
-                    gam.draw()
+                    new_maze = mz.right()
+                    gam.draw(new_maze)
                     gam.check_victory()
                 elif event.key == K_LEFT:
-                    mz.left()
-                    gam.draw()
+                    new_maze = mz.left()
+                    gam.draw(new_maze)
                     gam.check_victory()
                 elif event.key == K_DOWN:
-                    mz.down()
-                    gam.draw()
+                    new_maze = mz.down()
+                    gam.draw(new_maze)
                     gam.check_victory()
                 elif event.key == K_UP:
-                    mz.up()
-                    gam.draw()
+                    new_maze = mz.up()
+                    gam.draw(new_maze)
                     gam.check_victory()
 
 

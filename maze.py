@@ -46,7 +46,7 @@ class Maze:
             if self.maze[x][y + 1] != "1":
                 self.maze[x][y + 1] = "3"
                 self.maze[x][y] = "0"
-        print(self.maze)
+        return self.maze
 
     def left(self):
         """Make a new position for '3' if it don't '1'"""
@@ -55,6 +55,7 @@ class Maze:
             if self.maze[x][y - 1] != "1":
                 self.maze[x][y - 1] = "3"
                 self.maze[x][y] = "0"
+        return self.maze
 
     def up(self):
         """Make a new position for '3' if it don't '1'"""
@@ -63,6 +64,7 @@ class Maze:
             if self.maze[x - 1][y] != "1":
                 self.maze[x - 1][y] = "3"
                 self.maze[x][y] = "0"
+        return self.maze
 
     def down(self):
         """Make a new position for '3' if it don't '1'"""
@@ -71,6 +73,7 @@ class Maze:
             if self.maze[x + 1][y] != "1":
                 self.maze[x + 1][y] = "3"
                 self.maze[x][y] = "0"
+        return self.maze
 
     def component_count(self):
         """Check the count of component"""
@@ -80,7 +83,7 @@ class Maze:
                 if self.maze[i][y] == "4" or self.maze[i][y] == "5" or self.maze[i][y] == "6":
                     cnt += 1
         self.count = cnt
-
+        return  self.count
 
     def component_found(self):
         """Check if the component is under the maze"""
@@ -88,14 +91,14 @@ class Maze:
             return True
         pass
 
-    def blit_picture(self, pictures):
+    def blit_picture(self, pictures, maze):
         """Blit all the pictures on the maze"""
         ORANGE = 255, 100, 0  # color for the text
         text = pygame.font.SysFont('freesans', 13)  # Police and size
         screen = pygame.display.set_mode((450, 450))  # Set the size' screen
         screen.blit(pictures["00"], (0, 0))  # Picture for the font
         """Loop for blit all the pictures"""
-        for n_line, line in enumerate(self.maze):
+        for n_line, line in enumerate(maze):
             for n_tile, tile in enumerate(line):
                 x = n_tile * 30
                 y = n_line * 30
@@ -118,7 +121,7 @@ class Maze:
             return True
         pass
 
-    def draw(self, pictures):
+    def draw(self, pictures, maze):
         """All the methode for draw in 'game' """
-        self.blit_picture(pictures)
+        self.blit_picture(pictures, maze)
         self.component_count()

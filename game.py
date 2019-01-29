@@ -26,9 +26,9 @@ class Game:
         pictures["00"] = pygame.transform.scale(pictures["00"], (450, 450))
         return pictures
 
-    def draw(self):
+    def draw(self, maze):
         """Draw the graphique maze"""
-        self.mz.draw(self.pictures)
+        self.mz.draw(self.pictures, maze)
         pygame.display.set_caption("Welcome to the MacGame")
         pygame.display.flip()
 
