@@ -35,7 +35,6 @@ class Game:
     def run(self):
         """Set the game"""
         d = ""
-        pygame.init()
         self.draw()
         """Launch the game"""
         while d != "q":

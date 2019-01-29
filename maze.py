@@ -84,7 +84,7 @@ class Maze:
         """Check if the component is under the maze"""
         return self.find_tile("4") or self.find_tile("5") or self.find_tile("6")
 
-    def blit_picture(self, pictures):
+    def draw(self, pictures):
         """Blit all the pictures on the maze"""
         ORANGE = 255, 100, 0  # color for the text
         text = pygame.font.SysFont('freesans', 13)  # Police and size
@@ -97,6 +97,7 @@ class Maze:
                 y = n_line * 30
                 if tile != "0": screen.blit(pictures[tile], (x, y))
         """Set the rect for the counter in the screen"""
+        self.component_counter()
         title_text = text.render("Number of object(s) to found: {}".format(self.count),
                                  True, ORANGE)
         textpos = title_text.get_rect()
@@ -112,7 +113,4 @@ class Maze:
             return True
         return False
 
-    def draw(self, pictures):
-        """All the methode for draw in 'game' """
-        self.blit_picture(pictures)
-        self.component_counter()
+
