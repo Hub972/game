@@ -13,7 +13,7 @@ pygame.init()
 class Game:
     def __init__(self):
         self.pictures = Game.load_media()
-        self.mz = maze.Maze()
+        self.maze = maze.Maze()
 
     @staticmethod
     def load_media():
@@ -26,16 +26,45 @@ class Game:
         pictures["00"] = pygame.transform.scale(pictures["00"], (450, 450))
         return pictures
 
-    def draw(self, maze):
+    def draw(self):
         """Draw the graphique maze"""
-        self.mz.draw(self.pictures, maze)
+        self.maze.draw(self.pictures)
         pygame.display.set_caption("Welcome to the MacGame")
         pygame.display.flip()
 
+    def run(self):
+        """Set the game"""
+        d = ""
+        pygame.init()
+        self.draw()
+        """Launch the game"""
+        while d != "q":
+            """Check the events with pygame"""
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    d = "q"
+                if event.type == KEYDOWN:
+                    if event.key == K_RIGHT:
+                        self.maze.right()
+                        self.draw()
+                        self.check_victory()
+                    elif event.key == K_LEFT:
+                        self.maze.left()
+                        self.draw()
+                        self.check_victory()
+                    elif event.key == K_DOWN:
+                        self.maze.down()
+                        self.draw()
+                        self.check_victory()
+                    elif event.key == K_UP:
+                        self.maze.up()
+                        self.draw()
+                        self.check_victory()
+
     def check_victory(self):
         """For each position of mac check if the condition is done or wrong."""
-        if self.mz.check_pos():
-            if self.mz.component_found():
+        if self.maze.check_pos():
+            if self.maze.component_found():
                 pygame.display.set_caption('You lose')
                 time.sleep(3)
                 sys.exit(0)
