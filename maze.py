@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # -*- coding: utf8 -*-
+
 import random
 import pygame
 from pygame.locals import *
@@ -9,9 +10,8 @@ pygame.init()
 
 class Maze:
     def __init__(self):
-        self.maze = []
-        self.build_level = []
-        self.tile = ""
+        self.tile = Maze.make_level()
+        self.count = 0
 
     @staticmethod
     def make_level():
@@ -27,99 +27,90 @@ class Maze:
                     break
         return build_level
 
-    def find_mac(self, maze):
+    def find_mac(self):
         """Check the position of mac"""
-        self.maze = maze
-        for i in range(len(self.maze)):
-            for j in range(len(self.maze[i])):
-                if self.maze[i][j] == "3":
+        return self.find_tile("3")
+
+    def find_tile(self, tile):
+        """Check the position about the tile in parameter"""
+        for i in range(len(self.tile)):
+            for j in range(len(self.tile[i])):
+                if self.tile[i][j] == tile:
                     return i, j
         return None
 
-    def find_tile(self, maze, tile):
-        self.maze = maze
-        self.tile = tile
-        for i in range(len(self.maze)):
-            for j in range(len(self.maze[i])):
-                if self.maze[i][j] == self.tile:
-                    return i, j
-        return None
-
-    @classmethod
-    def right(cls, build_level):
-        """Make a new position for '3' if it don't '1' and return a new platform"""
-        cls.build_level = build_level
-        cls.maze = cls.build_level[:]
-        x, y = cls.find_mac(cls, cls.maze)
+    def move_right(self):
+        """Make a new position for '3' if it don't '1'"""
+        x, y = self.find_mac()
         if y < 14:
-            if cls.maze[x][y + 1] != "1":
-                cls.maze[x][y + 1] = "3"
-                cls.maze[x][y] = "0"
-        return list(cls.maze)
+            if self.tile[x][y + 1] != "1":
+                self.tile[x][y + 1] = "3"
+                self.tile[x][y] = "0"
 
-    @classmethod
-    def left(cls, build_level):
-        """Make a new position for '3' if it don't '1' and return a new platform"""
-        cls.build_level = build_level
-        cls.maze = cls.build_level[:]
-        x, y = cls.find_mac(cls, cls.maze)
+    def move_left(self):
+        """Make a new position for '3' if it don't '1'"""
+        x, y = self.find_mac()
         if y > 0:
-            if cls.maze[x][y - 1] != "1":
-                cls.maze[x][y - 1] = "3"
-                cls.maze[x][y] = "0"
-        return list(cls.maze)
+            if self.tile[x][y - 1] != "1":
+                self.tile[x][y - 1] = "3"
+                self.tile[x][y] = "0"
 
-    @classmethod
-    def up(cls, build_level):
-        """Make a new position for '3' if it don't '1' and return a new platform"""
-        cls.build_level = build_level
-        cls.maze = cls.build_level[:]
-        x, y = cls.find_mac(cls, cls.maze)
+    def move_up(self):
+        """Make a new position for '3' if it don't '1'"""
+        x, y = self.find_mac()
         if x > 0:
-            if cls.maze[x - 1][y] != "1":
-                cls.maze[x - 1][y] = "3"
-                cls.maze[x][y] = "0"
-        return list(cls.maze)
+            if self.tile[x - 1][y] != "1":
+                self.tile[x - 1][y] = "3"
+                self.tile[x][y] = "0"
 
-    @classmethod
-    def down(cls, build_level):
-        """Make a new position for '3' if it don't '1' and return a new platform"""
-        cls.build_level = build_level
-        cls.maze = cls.build_level[:]
-        x, y = cls.find_mac(cls, cls.maze)
+    def move_down(self):
+        """Make a new position for '3' if it don't '1'"""
+        x, y = self.find_mac()
         if x < 14:
-            if cls.maze[x + 1][y] != "1":
-                cls.maze[x + 1][y] = "3"
-                cls.maze[x][y] = "0"
-        return list(cls.maze)
+            if self.tile[x + 1][y] != "1":
+                self.tile[x + 1][y] = "3"
+                self.tile[x][y] = "0"
 
-    def component_count(self, maze):
+    def component_counter(self):
         """Check the count of component"""
-        self.maze = maze
-        count = 0
-        for i in range(len(self.maze)):
-            for y in range(len(maze[i])):
-                if maze[i][y] == "4" or maze[i][y] == "5" or maze[i][y] == "6":
-                    count += 1
-        pygame.display.set_caption('MacGame, number of object(s) to found: {}'.format(count))
+        cnt = 0
+        for i in range(len(self.tile)):
+            for y in range(len(self.tile[i])):
+                if self.tile[i][y] == "4" or self.tile[i][y] == "5" or self.tile[i][y] == "6":
+                    cnt += 1
+        self.count = cnt
 
-    def component_found(self, maze):
+    def component_found(self):
         """Check if the component is under the maze"""
-        self.maze = maze
-        x_p, y_p = self.find_mac(self.maze)
-        if self.maze[x_p][y_p] == self.maze[14][14]:
-            if self.find_tile(self.maze, "4") or self.find_tile(self.maze, "5") or self.find_tile(self.maze, "6"):
-                return "check victory..."
-        pass
+        return self.find_tile("4") or self.find_tile("5") or self.find_tile("6")
 
-    def blit_picture(self, pictures, maze):
+    def draw(self, pictures):
         """Blit all the pictures on the maze"""
-        self.maze = maze
-        self.pictures = pictures
-        screen = pygame.display.set_mode((450, 450))
-        screen.blit(self.pictures["00"], (0, 0))
-        for n_line, line in enumerate(self.maze):
+        ORANGE = 255, 100, 0  # color for the text
+        text = pygame.font.SysFont('freesans', 13)  # Police and size
+        screen = pygame.display.set_mode((450, 450))  # Set the size' screen
+        screen.blit(pictures["00"], (0, 0))  # Picture for the font
+        """Loop for blit all the pictures"""
+        for n_line, line in enumerate(self.tile):
             for n_tile, tile in enumerate(line):
                 x = n_tile * 30
                 y = n_line * 30
-                if tile != "0": screen.blit(self.pictures[tile], (x, y))
+                if tile != "0": screen.blit(pictures[tile], (x, y))
+        """Set the rect for the counter in the screen"""
+        self.component_counter()
+        title_text = text.render("Number of object(s) to found: {}".format(self.count),
+                                 True, ORANGE)
+        textpos = title_text.get_rect()
+        textpos.centerx = 350
+        textpos.centery = 10
+        screen.blit(title_text, textpos)
+        pygame.display.flip()
+
+    def check_final_condition(self):
+        """Check if mac is on the guard"""
+        x_p, y_p = self.find_mac()
+        if self.tile[x_p][y_p] == self.tile[14][14]:
+            return True
+        return False
+
+
