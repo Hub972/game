@@ -1,13 +1,13 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import game
+from game import Game
 
 
 def main():
     """Run the game"""
-    run = game.Game()
-    run.run()
+    game = Game()
+    game.run()
 
 
 if __name__ == '__main__':
