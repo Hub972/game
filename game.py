@@ -5,7 +5,7 @@ import pygame
 from pygame.locals import *
 import sys
 import time
-import maze
+from maze import Maze
 
 pygame.init()
 
@@ -13,7 +13,7 @@ pygame.init()
 class Game:
     def __init__(self):
         self.pictures = Game.load_media()
-        self.tile = maze.Maze()
+        self.maze = Maze()
 
     @staticmethod
     def load_media():
@@ -28,7 +28,7 @@ class Game:
 
     def draw(self):
         """Draw the graphique maze"""
-        self.tile.draw(self.pictures)
+        self.maze.draw(self.pictures)
         pygame.display.set_caption("Welcome to the MacGame")
         pygame.display.flip()
 
@@ -44,26 +44,26 @@ class Game:
                     d = "q"
                 if event.type == KEYDOWN:
                     if event.key == K_RIGHT:
-                        self.tile.move_right()
+                        self.maze.move_right()
                         self.draw()
                         self.check_victory()
                     elif event.key == K_LEFT:
-                        self.tile.move_left()
+                        self.maze.move_left()
                         self.draw()
                         self.check_victory()
                     elif event.key == K_DOWN:
-                        self.tile.move_down()
+                        self.maze.move_down()
                         self.draw()
                         self.check_victory()
                     elif event.key == K_UP:
-                        self.tile.move_up()
+                        self.maze.move_up()
                         self.draw()
                         self.check_victory()
 
     def check_victory(self):
         """For each position of mac check if the condition is done or wrong."""
-        if self.tile.check_final_condition():
-            if self.tile.component_found():
+        if self.maze.check_final_condition():
+            if self.maze.component_found():
                 pygame.display.set_caption('You lose')
                 time.sleep(3)
                 sys.exit(0)
