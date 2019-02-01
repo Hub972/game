@@ -10,7 +10,7 @@ pygame.init()
 
 class Maze:
     def __init__(self):
-        self.tile = Maze.make_level()
+        self.tiles = Maze.make_level()
         self.count = 0
 
     @staticmethod
@@ -33,9 +33,9 @@ class Maze:
 
     def find_tile(self, tile):
         """Check the position about the tile in parameter"""
-        for i in range(len(self.tile)):
-            for j in range(len(self.tile[i])):
-                if self.tile[i][j] == tile:
+        for i in range(len(self.tiles)):
+            for j in range(len(self.tiles[i])):
+                if self.tiles[i][j] == tile:
                     return i, j
         return None
 
@@ -43,40 +43,40 @@ class Maze:
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if y < 14:
-            if self.tile[x][y + 1] != "1":
-                self.tile[x][y + 1] = "3"
-                self.tile[x][y] = "0"
+            if self.tiles[x][y + 1] != "1":
+                self.tiles[x][y + 1] = "3"
+                self.tiles[x][y] = "0"
 
     def move_left(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if y > 0:
-            if self.tile[x][y - 1] != "1":
-                self.tile[x][y - 1] = "3"
-                self.tile[x][y] = "0"
+            if self.tiles[x][y - 1] != "1":
+                self.tiles[x][y - 1] = "3"
+                self.tiles[x][y] = "0"
 
     def move_up(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if x > 0:
-            if self.tile[x - 1][y] != "1":
-                self.tile[x - 1][y] = "3"
-                self.tile[x][y] = "0"
+            if self.tiles[x - 1][y] != "1":
+                self.tiles[x - 1][y] = "3"
+                self.tiles[x][y] = "0"
 
     def move_down(self):
         """Make a new position for '3' if it don't '1'"""
         x, y = self.find_mac()
         if x < 14:
-            if self.tile[x + 1][y] != "1":
-                self.tile[x + 1][y] = "3"
-                self.tile[x][y] = "0"
+            if self.tiles[x + 1][y] != "1":
+                self.tiles[x + 1][y] = "3"
+                self.tiles[x][y] = "0"
 
     def component_counter(self):
         """Check the count of component"""
         cnt = 0
-        for i in range(len(self.tile)):
-            for y in range(len(self.tile[i])):
-                if self.tile[i][y] == "4" or self.tile[i][y] == "5" or self.tile[i][y] == "6":
+        for i in range(len(self.tiles)):
+            for y in range(len(self.tiles[i])):
+                if self.tiles[i][y] == "4" or self.tiles[i][y] == "5" or self.tiles[i][y] == "6":
                     cnt += 1
         self.count = cnt
 
@@ -91,7 +91,7 @@ class Maze:
         screen = pygame.display.set_mode((450, 450))  # Set the size' screen
         screen.blit(pictures["00"], (0, 0))  # Picture for the font
         """Loop for blit all the pictures"""
-        for n_line, line in enumerate(self.tile):
+        for n_line, line in enumerate(self.tiles):
             for n_tile, tile in enumerate(line):
                 x = n_tile * 30
                 y = n_line * 30
@@ -109,8 +109,6 @@ class Maze:
     def check_final_condition(self):
         """Check if mac is on the guard"""
         x_p, y_p = self.find_mac()
-        if self.tile[x_p][y_p] == self.tile[14][14]:
-            return True
-        return False
+        return self.tiles[x_p][y_p] == self.tiles[14][14]
 
 
