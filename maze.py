@@ -27,10 +27,6 @@ class Maze:
                     break
         return build_level
 
-    def find_mac(self):
-        """Check the position of mac"""
-        return self.find_tile("3")
-
     def find_tile(self, tile):
         """Check the position about the tile in parameter"""
         for i in range(len(self.tiles)):
@@ -38,6 +34,10 @@ class Maze:
                 if self.tiles[i][j] == tile:
                     return i, j
         return None
+
+    def find_mac(self):
+        """Check the position of mac"""
+        return self.find_tile("3")
 
     def move_right(self):
         """Make a new position for '3' if it don't '1'"""
