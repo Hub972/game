@@ -111,4 +111,3 @@ class Maze:
         x_p, y_p = self.find_mac()
         return self.tiles[x_p][y_p] == self.tiles[14][14]
 
-
