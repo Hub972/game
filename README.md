@@ -1,6 +1,7 @@
-# game
-Share my code on gitHub. This is a Mc gyver game.
-Mac gyver must find some objects for build a syring
-with this, Mac gyver attack the guadian and escape
-the maze. If Mac gyver don't have all the objects 
-he lose.
+# Project_3
+This is a maze game where Mac gyver (the heroe) must find 
+some components to build a tranquilizer to make sleep the
+guardian. Than he could escape and finish the game.
+Game made with Python 3.7 and pygame 1.9.4.
+Use pip install -r requirements.txt to install
+the dependancies.
