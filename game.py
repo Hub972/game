@@ -5,7 +5,10 @@ import pygame
 from pygame.locals import *
 import sys
 import time
+
+
 from maze import Maze
+
 
 pygame.init()
 
@@ -31,6 +34,18 @@ class Game:
         self.maze.draw(self.pictures)
         pygame.display.set_caption("Welcome to the MacGame")
         pygame.display.flip()
+
+    def check_victory(self):
+        """For each position of mac check if the condition is done or wrong."""
+        if self.maze.check_final_condition():
+            if self.maze.component_found():
+                pygame.display.set_caption('You lose')
+                time.sleep(3)
+                sys.exit(0)
+            else:
+                pygame.display.set_caption("You win")
+                time.sleep(3)
+                sys.exit(0)
 
     def run(self):
         """Set the game"""
@@ -60,16 +75,6 @@ class Game:
                         self.draw()
                         self.check_victory()
 
-    def check_victory(self):
-        """For each position of mac check if the condition is done or wrong."""
-        if self.maze.check_final_condition():
-            if self.maze.component_found():
-                pygame.display.set_caption('You lose')
-                time.sleep(3)
-                sys.exit(0)
-            else:
-                pygame.display.set_caption("You win")
-                time.sleep(3)
-                sys.exit(0)
+
 
 
