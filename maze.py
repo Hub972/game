@@ -108,6 +108,5 @@ class Maze:
 
     def check_final_condition(self):
         """Check if mac is on the guard"""
-        x_p, y_p = self.find_mac()
         return self.find_tile("2") is None
 
