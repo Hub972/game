@@ -33,11 +33,15 @@ class Maze:
             for j in range(len(self.tiles[i])):
                 if self.tiles[i][j] == tile:
                     return i, j
-        return None
+        pass
 
     def find_mac(self):
         """Check the position of mac"""
         return self.find_tile("3")
+
+    def find_guard(self):
+        """Check the position of the guardian"""
+        return self.find_tile("2")
 
     def move_right(self):
         """Make a new position for '3' if it don't '1'"""
@@ -108,6 +112,5 @@ class Maze:
 
     def check_final_condition(self):
         """Check if mac is on the guard"""
-        x_p, y_p = self.find_mac()
-        return self.tiles[x_p][y_p] == self.tiles[14][14]
+        return self.find_guard() is None
 
