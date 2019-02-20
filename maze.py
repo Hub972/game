@@ -33,7 +33,7 @@ class Maze:
             for j in range(len(self.tiles[i])):
                 if self.tiles[i][j] == tile:
                     return i, j
-        pass
+        None
 
     def find_mac(self):
         """Check the position of mac"""
